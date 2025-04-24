@@ -1,5 +1,5 @@
 import {
-  UIMessage,
+  type UIMessage,
   appendResponseMessages,
   createDataStreamResponse,
   smoothStream,
@@ -43,8 +43,8 @@ export async function POST(request: Request) {
 
     const session = await auth();
 
-    if (!session || !session.user || !session.user.id) {
-      return new Response("Unauthorized", { status: 401 });
+    if (!session?.user?.id) {
+      return new Response('Unauthorized', { status: 401 });
     }
 
     const userMessage = getMostRecentUserMessage(messages);
@@ -63,7 +63,7 @@ export async function POST(request: Request) {
       await saveChat({ id, userId: session.user.id, title });
     } else {
       if (chat.userId !== session.user.id) {
-        return new Response("Unauthorized", { status: 401 });
+        return new Response('Forbidden', { status: 403 });
       }
     }
 
@@ -160,8 +160,8 @@ export async function POST(request: Request) {
       },
     });
   } catch (error) {
-    return new Response("An error occurred while processing your request!", {
-      status: 404,
+    return new Response('An error occurred while processing your request!', {
+      status: 500,
     });
   }
 }
@@ -176,20 +176,20 @@ export async function DELETE(request: Request) {
 
   const session = await auth();
 
-  if (!session || !session.user) {
-    return new Response("Unauthorized", { status: 401 });
+  if (!session?.user?.id) {
+    return new Response('Unauthorized', { status: 401 });
   }
 
   try {
     const chat = await getChatById({ id });
 
     if (chat.userId !== session.user.id) {
-      return new Response("Unauthorized", { status: 401 });
+      return new Response('Forbidden', { status: 403 });
     }
 
-    await deleteChatById({ id });
+    const deletedChat = await deleteChatById({ id });
 
-    return new Response("Chat deleted", { status: 200 });
+    return Response.json(deletedChat, { status: 200 });
   } catch (error) {
     return new Response("An error occurred while processing your request!", {
       status: 500,
