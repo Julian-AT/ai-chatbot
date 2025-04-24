@@ -87,6 +87,7 @@ export const codeArtifact = new Artifact<'code', Metadata>({
             ? true
             : draftArtifact.isVisible,
         status: 'streaming',
+        
       }));
     }
   },
