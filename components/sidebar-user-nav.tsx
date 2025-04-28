@@ -1,5 +1,10 @@
 'use client';
-import { ChevronUp } from 'lucide-react';
+import {
+  ChevronUp,
+  Settings2,
+  Settings2Icon,
+  SettingsIcon,
+} from 'lucide-react';
 import Image from 'next/image';
 import type { User } from 'next-auth';
 import { signOut } from 'next-auth/react';
@@ -26,16 +31,30 @@ export function SidebarUserNav({ user }: { user: User }) {
       <SidebarMenuItem>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <SidebarMenuButton className="data-[state=open]:bg-sidebar-accent bg-background data-[state=open]:text-sidebar-accent-foreground h-10">
-              <Image
-                src={`https://avatar.vercel.sh/${user.email}`}
-                alt={user.email ?? 'User Avatar'}
-                width={24}
-                height={24}
-                className="rounded-full"
-              />
-              <span className="truncate">{user?.email}</span>
-              <ChevronUp className="ml-auto" />
+            <SidebarMenuButton className="data-[state=open]:bg-sidebar-accent bg-background data-[state=open]:text-sidebar-accent-foreground h-12 my-2 overflow-visible flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="relative">
+                  <Image
+                    src={`/images/sophie.png`}
+                    alt={user.email ?? 'User Avatar'}
+                    width={40}
+                    height={40}
+                    className="rounded-sm"
+                  />
+                  <div className="size-4 flex items-center justify-center bg-white rounded-full absolute -bottom-1.5 -right-1.5">
+                    <div className="size-2.5 bg-green-500 rounded-full" />
+                  </div>
+                </div>
+                <div className="flex flex-col -gap-2">
+                  <span className="truncate text-secondary-foreground">
+                    Sophia
+                  </span>
+                  <span className="truncate text-muted-foreground">
+                    Pro Plan
+                  </span>
+                </div>
+              </div>
+              <SettingsIcon className="size-max" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent

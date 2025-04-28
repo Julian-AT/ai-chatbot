@@ -41,7 +41,7 @@ export function ModelSelector({
       >
         <Button
           data-testid="model-selector"
-          variant="outline"
+          variant="ghost"
           className="md:px-2 md:h-[34px]"
         >
           {selectedChatModel?.name}

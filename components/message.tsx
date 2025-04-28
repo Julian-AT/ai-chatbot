@@ -19,6 +19,7 @@ import { MessageEditor } from './message-editor';
 import { DocumentPreview } from './document-preview';
 import { MessageReasoning } from './message-reasoning';
 import { UseChatHelpers } from '@ai-sdk/react';
+import Image from 'next/image';
 
 const PurePreviewMessage = ({
   chatId,
@@ -58,9 +59,15 @@ const PurePreviewMessage = ({
           )}
         >
           {message.role === 'assistant' && (
-            <div className="size-8 flex items-center rounded-full justify-center ring-1 shrink-0 ring-border bg-background">
+            <div className="size-10 flex items-center rounded-lg justify-center ring-1 shrink-0 ring-border bg-background">
               <div className="translate-y-px">
-                <SparklesIcon size={14} />
+                <Image
+                  src="/images/logo.png"
+                  alt="Interiorly Logo"
+                  className="w-full h-full"
+                  width={64}
+                  height={64}
+                />
               </div>
             </div>
           )}
@@ -119,7 +126,7 @@ const PurePreviewMessage = ({
                       <div
                         data-testid="message-content"
                         className={cn('flex flex-col gap-4', {
-                          'bg-primary text-primary-foreground px-3 py-2 rounded-xl':
+                          'bg-white border text-secondary-foreground px-3 py-2 rounded-xl':
                             message.role === 'user',
                         })}
                       >
@@ -261,13 +268,13 @@ export const ThinkingMessage = () => {
           },
         )}
       >
-        <div className="size-8 flex items-center rounded-full justify-center ring-1 shrink-0 ring-border">
+        <div className="size-12 flex items-center rounded-lg justify-center ring-1 shrink-0 ring-border">
           <SparklesIcon size={14} />
         </div>
 
         <div className="flex flex-col gap-2 w-full">
           <div className="flex flex-col gap-4 text-muted-foreground">
-            Hmm...
+            Thinking...
           </div>
         </div>
       </div>

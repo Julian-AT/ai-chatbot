@@ -3,7 +3,8 @@
 import { motion } from 'framer-motion';
 import { Button } from './ui/button';
 import { memo } from 'react';
-import { UseChatHelpers } from '@ai-sdk/react';
+import type { UseChatHelpers } from '@ai-sdk/react';
+import { ArrowRightIcon } from 'lucide-react';
 
 interface SuggestedActionsProps {
   chatId: string;
@@ -13,31 +14,28 @@ interface SuggestedActionsProps {
 function PureSuggestedActions({ chatId, append }: SuggestedActionsProps) {
   const suggestedActions = [
     {
-      title: 'What are the advantages',
-      label: 'of using Next.js?',
-      action: 'What are the advantages of using Next.js?',
+      title: 'Complete Room Transformation',
+      label:
+        'Redesign an existing room. Change the color palette, move furniture etc.',
+      action:
+        'Redesign an existing room. Change the color palette, move furniture etc.',
     },
     {
-      title: 'Write code to',
-      label: `demonstrate djikstra's algorithm`,
-      action: `Write code to demonstrate djikstra's algorithm`,
+      title: 'Improvement Suggestion',
+      label: `Get solid suggestions for possible improvements for a room `,
+      action: `Get solid suggestions for possible improvements for a room `,
     },
     {
-      title: 'Help me write an essay',
-      label: `about silicon valley`,
-      action: `Help me write an essay about silicon valley`,
-    },
-    {
-      title: 'What is the weather',
-      label: 'in San Francisco?',
-      action: 'What is the weather in San Francisco?',
+      title: 'New Room Concept',
+      label: `Generate a new room design concept entirely from scratch.`,
+      action: `Generate a new room design concept entirely from scratch.`,
     },
   ];
 
   return (
     <div
       data-testid="suggested-actions"
-      className="grid sm:grid-cols-2 gap-2 w-full"
+      className="grid sm:grid-cols-3 gap-2 w-full bg-[#F9F8FF] z-20"
     >
       {suggestedActions.map((suggestedAction, index) => (
         <motion.div
@@ -58,12 +56,19 @@ function PureSuggestedActions({ chatId, append }: SuggestedActionsProps) {
                 content: suggestedAction.action,
               });
             }}
-            className="text-left border rounded-xl px-4 py-3.5 text-sm flex-1 gap-1 sm:flex-col w-full h-auto justify-start items-start"
+            className="text-left border rounded-xl px-4 py-3.5 text-sm flex-1 flex flex-col w-full h-full justify-start items-start bg-white"
           >
-            <span className="font-medium">{suggestedAction.title}</span>
-            <span className="text-muted-foreground">
-              {suggestedAction.label}
-            </span>
+            <div className="flex flex-row justify-between items-center w-full">
+              <span className="font-medium text-xl text-wrap">
+                {suggestedAction.title}
+              </span>
+              <ArrowRightIcon className="size-4 ml-2" />
+            </div>
+            <div className="mt-2">
+              <span className="text-muted-foreground text-wrap text-xs">
+                {suggestedAction.label}
+              </span>
+            </div>
           </Button>
         </motion.div>
       ))}
