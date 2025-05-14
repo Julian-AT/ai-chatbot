@@ -155,11 +155,14 @@ export async function POST(request: Request) {
           sendReasoning: true,
         });
       },
-      onError: () => {
+      onError: (error) => {
+        console.error(error);
         return "Oops, an error occurred!";
       },
     });
   } catch (error) {
+    console.log(error);
+    
     return new Response('An error occurred while processing your request!', {
       status: 500,
     });

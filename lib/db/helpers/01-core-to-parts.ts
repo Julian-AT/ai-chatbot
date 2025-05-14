@@ -12,7 +12,7 @@ import { inArray } from 'drizzle-orm';
 import { appendResponseMessages, UIMessage } from 'ai';
 
 config({
-  path: '.env.local',
+  path: '.env',
 });
 
 if (!process.env.POSTGRES_URL) {
